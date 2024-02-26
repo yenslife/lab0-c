@@ -19,6 +19,8 @@ it bbb
 rh
 # remove tail
 rt bbb
+# delete mid
+dm
 # Reverse it
 reverse
 # See how long it is
