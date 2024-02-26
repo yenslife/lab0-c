@@ -10,9 +10,15 @@ size
 ih dolphin
 ih bear
 ih gerbil
+ih aaa
 # Now at the tail
 it meerkat
 it bear
+it bbb
+# remove head
+rh
+# remove tail
+rt bbb
 # Reverse it
 reverse
 # See how long it is
