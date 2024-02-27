@@ -29,6 +29,19 @@ dm
 dedup
 # Reverse it
 reverse
+# insert a, b, c
+it a
+it b
+it c
+# ReverseK k = 2
+reverseK 2
+reverseK 2
+# ReverseK k = 3
+reverseK 3
+reverseK 3
+# ReverseK k = 7
+reverseK 7
+reverseK 7
 # See how long it is
 size
 # Delete queue.  Goes back to a NULL queue.
