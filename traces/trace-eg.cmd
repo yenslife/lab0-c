@@ -42,6 +42,9 @@ reverseK 3
 # ReverseK k = 7
 reverseK 7
 reverseK 7
+# swap
+swap
+swap
 # See how long it is
 size
 # Delete queue.  Goes back to a NULL queue.
