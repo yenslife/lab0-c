@@ -15,12 +15,18 @@ ih aaa
 it meerkat
 it bear
 it bbb
+it bbb
+it ccc
+it ccc
+it bbb
 # remove head
 rh
 # remove tail
 rt bbb
 # delete mid
 dm
+# delete dup
+dedup
 # Reverse it
 reverse
 # See how long it is
