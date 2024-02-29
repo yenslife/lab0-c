@@ -42,6 +42,10 @@ element_t *create_element(char *s)
     if (!ele)
         return NULL;
     ele->value = strdup(s);
+    if (!ele->value) {
+        free(ele);
+        return NULL;
+    }
 
     return ele;
 }
