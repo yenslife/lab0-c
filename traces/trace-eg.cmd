@@ -6,7 +6,7 @@ show
 new
 # See how long it is
 size
-# Fill it with some values.  First at the head
+# Fill it with some values. First at the head
 ih dolphin
 ih bear
 ih gerbil
@@ -45,9 +45,11 @@ reverseK 7
 # swap
 swap
 swap
+# sort
+sort
 # See how long it is
 size
-# Delete queue.  Goes back to a NULL queue.
+# Delete queue. Goes back to a NULL queue.
 free
 # Exit program
 quit
