@@ -86,7 +86,7 @@ element_t *remove_element(element_t *ele, char *sp, size_t bufsize)
     list_del(&ele->list);
 
     if (sp && bufsize) {
-        memcpy(sp, ele->value, bufsize);
+        strncpy(sp, ele->value, bufsize);
         sp[bufsize - 1] = '\0';
     }
 
