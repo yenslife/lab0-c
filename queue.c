@@ -218,8 +218,6 @@ void q_reverseK(struct list_head *head, int k)
     }
 }
 
-/* Sort elements of queue in ascending/descending order */
-void q_sort(struct list_head *head, bool descend) {}
 
 /* Remove every node which has a node with a strictly less value anywhere to
  * the right side of it */
@@ -317,4 +315,30 @@ int q_merge(struct list_head *head, bool descend)
         merge_two_list(first->q, L2, descend);
     }
     return q_size(list_entry(head->next, queue_contex_t, chain)->q);
+}
+
+/* Sort elements of queue in ascending/descending order */
+void q_sort(struct list_head *head, bool descend)
+{
+    if (!head || list_empty(head) || list_is_singular(head))
+        return;
+
+    /* find mid point, which is first point */
+    struct list_head *first = head->next, *end = head->prev;
+    while (first != end && first->prev != end) {
+        first = first->next;
+        end = end->prev;
+    }
+
+    /* divide and conquer */
+    struct list_head left;
+    INIT_LIST_HEAD(&left);
+    list_cut_position(&left, head, first->prev);
+
+    q_sort(head, descend);
+    q_sort(&left, descend);
+
+    /* merge two list */
+    if (!list_empty(&left))
+        merge_two_list(head, &left, descend);
 }
