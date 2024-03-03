@@ -145,8 +145,8 @@ bool q_delete_mid(struct list_head *head)
         end = end->prev;
     }
 
-    element_t *ele = list_entry(end, element_t, list);
-    list_del(end);
+    element_t *ele = list_entry(first, element_t, list);
+    list_del(first);
     q_release_element(ele);
 
     return true;
