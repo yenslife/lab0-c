@@ -160,18 +160,15 @@ bool q_delete_dup(struct list_head *head)
         return false;
 
     element_t *cur, *next;
-    bool del_flag = false;
+    bool cur_dup = false;
 
     list_for_each_entry_safe (cur, next, head, list) {
-        if (&next->list != head && !strcmp(cur->value, next->value)) {
-            list_del(&cur->list);
-            q_release_element(cur);
-            del_flag = true;
-        } else if (del_flag) {
-            del_flag = false;
+        bool next_dup = &next->list != head && !strcmp(cur->value, next->value);
+        if (next_dup || cur_dup) {
             list_del(&cur->list);
             q_release_element(cur);
         }
+        cur_dup = next_dup;
     }
 
     return true;
