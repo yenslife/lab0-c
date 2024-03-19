@@ -35,32 +35,23 @@ void q_free(struct list_head *head)
     free(head);
 }
 
-/* Create a element and return its address */
-element_t *create_element(char *s)
-{
-    element_t *ele = malloc(sizeof(element_t));
-    if (!ele)
-        return NULL;
-    ele->value = strdup(s);
-    if (!ele->value) {
-        free(ele);
-        return NULL;
-    }
-
-    return ele;
-}
-
 /* Insert an element at head of queue */
 bool q_insert_head(struct list_head *head, char *s)
 {
     if (!head)
         return false;
 
-    element_t *new_ele = create_element(s);
-    if (!new_ele)
+    element_t *ele = malloc(sizeof(element_t));
+
+    if (!ele)
         return false;
 
-    list_add(&new_ele->list, head);
+    ele->value = strdup(s);
+    if (!ele->value) {
+        free(ele);
+        return false;
+    }
+    list_add(&ele->list, head);
 
     return true;
 }
@@ -68,16 +59,7 @@ bool q_insert_head(struct list_head *head, char *s)
 /* Insert an element at tail of queue */
 bool q_insert_tail(struct list_head *head, char *s)
 {
-    if (!head)
-        return false;
-
-    element_t *new_ele = create_element(s);
-    if (!new_ele)
-        return false;
-
-    list_add_tail(&new_ele->list, head);
-
-    return true;
+    return q_insert_head(head->prev, s);
 }
 
 /* Remove an element form queue */
