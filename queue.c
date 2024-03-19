@@ -229,17 +229,7 @@ int q_descend(struct list_head *head)
         return 0;
 
     q_reverse(head);
-    struct list_head *cur, *safe;
-    element_t *max_ele = list_entry(head->next, element_t, list);
-    list_for_each_safe (cur, safe, head) {
-        element_t *cur_ele = list_entry(cur, element_t, list);
-        if (strcmp(cur_ele->value, max_ele->value) >= 0)
-            max_ele = cur_ele;
-        else {
-            list_del(cur);
-            q_release_element(cur_ele);
-        }
-    }
+    q_ascend(head);
     q_reverse(head);
     return q_size(head);
 }
