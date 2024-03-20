@@ -236,7 +236,7 @@ void merge_two_list(struct list_head *L1, struct list_head *L2, bool descend)
         element_t *ele2 = list_entry(p2, element_t, list);
         int cmp_result = strcmp(ele1->value, ele2->value);
 
-        if ((!descend && cmp_result <= 0) || (descend && cmp_result >= 0)) {
+        if ((!descend && cmp_result < 0) || (descend && cmp_result > 0)) {
             p1 = p1->next;
         } else {
             struct list_head *tmp = p2->next;
