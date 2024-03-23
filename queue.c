@@ -287,8 +287,7 @@ void q_sort(struct list_head *head, bool descend)
     }
 
     /* divide and conquer */
-    struct list_head left;
-    INIT_LIST_HEAD(&left);
+    LIST_HEAD(left);
     list_cut_position(&left, head, first->prev);
 
     q_sort(head, descend);
