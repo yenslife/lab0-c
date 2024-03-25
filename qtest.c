@@ -1056,6 +1056,46 @@ static bool do_next(int argc, char *argv[])
     return q_show(0);
 }
 
+static bool do_shuffle(int argc, char *argv[])
+{
+    int cnt = 0;
+    if (!current || !current->q)
+        report(3, "Warning: Calling shuffle on null queue");
+    else
+        cnt = q_size(current->q);
+    error_check();
+
+    if (cnt < 2)
+        report(3, "Warning: Calling shuffle on single node");
+    error_check();
+
+    /* use Fish Yates shuffle algorithm */
+    if (!current->q || list_empty(current->q))
+        return -1;
+    int len = q_size(current->q);
+
+    /* start algorithm */
+    struct list_head *old, *new;
+    for (; len > 1; len--) {
+        int random = rand() % len;
+        /* find the random-th node */
+        old = current->q->next;
+        for (int i = 0; i < random; i++)
+            old = old->next;
+        /* find the last node which is not swapped */
+        new = current->q->prev;
+        for (int i = 0; i < len - 1; i++)
+            new = new->prev;
+        element_t *ele_old = list_entry(old, element_t, list);
+        element_t *ele_new = list_entry(new, element_t, list);
+        char *tmp = ele_old->value;
+        ele_old->value = ele_new->value;
+        ele_new->value = tmp;
+    }
+    q_show(3);
+    return !error_check();
+}
+
 static void console_init()
 {
     ADD_COMMAND(new, "Create new queue", "");
@@ -1096,6 +1136,7 @@ static void console_init()
                 "");
     ADD_COMMAND(reverseK, "Reverse the nodes of the queue 'K' at a time",
                 "[K]");
+    ADD_COMMAND(shuffle, "Shuffle the nodes of the queue", "");
     add_param("length", &string_length, "Maximum length of displayed string",
               NULL);
     add_param("malloc", &fail_probability, "Malloc failure probability percent",
